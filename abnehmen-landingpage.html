@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Best Body - Das 12-Wochen Fitnessprogramm von Dr. Daniel Gärtner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #FFB800;
+            --dark: #1A1A2E;
+            --light: #FFF8F0;
+            --accent: #00D9FF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FF6B35 0%, #FFB800 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 60s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: white;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: white;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1.5rem 4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite, fadeInUp 0.8s ease-out 0.4s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.1);
+            transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+            top: calc(50% - 150px);
+            left: calc(50% - 150px);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: white;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, var(--light) 0%, white 100%);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--primary);
+            margin: 1rem auto 0;
+            border-radius: 3px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #FFF8F0 0%, white 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Transformation Section */
+        .transformation {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark) 0%, #2A2A3E 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transformation::before {
+            content: '★';
+            position: absolute;
+            font-size: 20rem;
+            color: rgba(255, 255, 255, 0.03);
+            top: -5rem;
+            right: -5rem;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .transformation-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .stat:nth-child(1) { animation-delay: 0.2s; }
+        .stat:nth-child(2) { animation-delay: 0.4s; }
+        .stat:nth-child(3) { animation-delay: 0.6s; }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--secondary);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .testimonial-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-style: italic;
+            color: #444;
+            line-height: 1.8;
+            margin: 2rem 0;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -2rem;
+            left: 0;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .stars {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -250px;
+            left: -250px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .final-cta::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -200px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-30px) translateX(30px); }
+        }
+
+        .final-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-cta h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .final-cta p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .price-box {
+            background: white;
+            color: var(--dark);
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 2rem auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.5rem;
+        }
+
+        .new-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+
+        .guarantee {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            border: 2px dashed white;
+        }
+
+        .guarantee-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .cta-button {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 3;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2.5rem;
+            color: white;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>YOUR BEST BODY<br>DER KÖRPER<br>DEINES LEBENS</h1>
+            <p class="subtitle">Das 12-Wochen-Programm von Dr. Daniel Gärtner – Trainiere wo du willst, wann du willst.</p>
+            <a href="#" class="cta-button">JETZT STARTEN</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Die 5 Säulen deines Erfolgs</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">💪</span>
+                    <h3>Kraft & Ausdauer</h3>
+                    <p>Über 30 Videos in Echtzeit: Krafttraining, HIIT, Aerobic und Athletic-Einheiten. Muskelaufbau und Fettverbrennung perfekt kombiniert.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🧘</span>
+                    <h3>Beweglichkeit & Koordination</h3>
+                    <p>Stretching, Faszien-Training, Entspannung und Koordinationsübungen für einen beweglichen, leistungsfähigen Körper.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🍽️</span>
+                    <h3>Intermittierendes Fasten</h3>
+                    <p>Wissenschaftlich fundiertes Ernährungskonzept mit leckeren Rezepten. Abnehmen und die Top-Figur dauerhaft halten.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Details -->
+    <section class="transformation">
+        <div class="transformation-content">
+            <h2 class="section-title">Dein 12-Wochen-Trainingsplan</h2>
+            <div style="max-width: 900px; margin: 2rem auto; text-align: left;">
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; margin-bottom: 1.5rem; border-left: 5px solid var(--secondary);">
+                    <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; color: var(--secondary);">Phase 1: Woche 1-3 – Einstieg</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.95;">2x pro Woche Training. Sanfter Einstieg und Gewöhnung an die Übungen. Perfekt für den Wiedereinstieg.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; margin-bottom: 1.5rem; border-left: 5px solid var(--secondary);">
+                    <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; color: var(--secondary);">Phase 2: Woche 4-7 – Aufbau</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.95;">3x pro Woche Training. Fokus auf Kraft und Muskelaufbau. Hier beginnt die echte Transformation.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; border-left: 5px solid var(--secondary);">
+                    <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; color: var(--secondary);">Phase 3: Woche 8-12 – Definition</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.95;">4-5x pro Woche Training. Intensive Definition und Feinschliff. Dein Traumkörper wird Realität!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Section -->
+    <section class="transformation">
+        <div class="transformation-content">
+            <h2 class="section-title">Das komplette Paket</h2>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Videos in Echtzeit</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Wochen zum Traumkörper</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Trainingssäulen kombiniert</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Dein Trainer: Dr. Daniel Gärtner</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.2rem; line-height: 1.8; color: #444; margin-bottom: 2rem;">
+                    Sportwissenschaftler und Dozent an der TU München. Betreut die Ski- und Snowboard-Nationalmannschaft sowie das deutsche Skisprung-Team. Über 20 Jahre Erfahrung als Fitness-Trainer und Co-Moderator der VOX-Sendung "Ewige Helden".
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">🎓</div>
+                        <strong style="display: block; font-size: 1.1rem;">Sportwissenschaftler</strong>
+                        <span style="color: #666;">TU München</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">🏆</div>
+                        <strong style="display: block; font-size: 1.1rem;">National-Coach</strong>
+                        <span style="color: #666;">Ski & Snowboard</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">📺</div>
+                        <strong style="display: block; font-size: 1.1rem;">TV-Experte</strong>
+                        <span style="color: #666;">VOX "Ewige Helden"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="transformation">
+        <div class="transformation-content">
+            <h2 class="section-title">Das bekommst du</h2>
+            <div style="max-width: 1000px; margin: 2rem auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: left;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📹</div>
+                        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--secondary);">30+ Training Videos</h3>
+                        <ul style="list-style: none; padding: 0; line-height: 2; opacity: 0.95;">
+                            <li>✓ 9 Krafttraining-Videos</li>
+                            <li>✓ 8 Ausdauer-Videos (HIIT, Aerobic)</li>
+                            <li>✓ 4 Stretching & Faszien</li>
+                            <li>✓ 4 Koordinations-Videos</li>
+                            <li>✓ Als Stream & Download</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🥗</div>
+                        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--secondary);">Ernährungskonzept</h3>
+                        <ul style="list-style: none; padding: 0; line-height: 2; opacity: 0.95;">
+                            <li>✓ Intermittierendes Fasten</li>
+                            <li>✓ Leckere Rezepte</li>
+                            <li>✓ Gesunde Alternativen</li>
+                            <li>✓ Wissenschaftlich fundiert</li>
+                            <li>✓ Dauerhafte Ergebnisse</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔬</div>
+                        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--secondary);">Wissenschaft & Extras</h3>
+                        <ul style="list-style: none; padding: 0; line-height: 2; opacity: 0.95;">
+                            <li>✓ Aktuelle Studien</li>
+                            <li>✓ Technik-Videos</li>
+                            <li>✓ Bonus-Material</li>
+                            <li>✓ Studio-Alternativen</li>
+                            <li>✓ Individuelle Empfehlungen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="testimonial-container">
+            <h2 class="section-title">Was Teilnehmer sagen</h2>
+            <div class="testimonial-quote">
+                Das Programm ist intensiv, aber die Videos von Dr. Gärtner motivieren unglaublich. Ich trainiere flexibel zu Hause und die Kombination aus Kraft, Ausdauer und dem Ernährungskonzept hat mir meinen Traumkörper gebracht. Nach 12 Wochen bin ich stärker, definierter und fitter als je zuvor!
+            </div>
+            <div class="testimonial-author">— Michael R., 38 Jahre</div>
+            <div class="stars">★★★★★</div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="final-cta-content">
+            <h2>Starte jetzt deine Transformation!</h2>
+            <p>Trainiere wo und wann du willst – im Wohnzimmer, auf der Terrasse oder im Hotelzimmer.</p>
+            
+            <div class="price-box">
+                <div class="old-price">Statt 197€</div>
+                <div class="new-price">Nur 97€</div>
+                <p style="margin: 0; color: var(--primary); font-weight: 600;">Einmalzahlung – Lebenslanger Zugang</p>
+            </div>
+
+            <a href="#" class="cta-button">JETZT ZUGREIFEN</a>
+
+            <div style="background: white; color: var(--dark); padding: 2rem; border-radius: 20px; margin: 2rem auto; max-width: 600px; text-align: left;">
+                <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem; text-align: center;">✓ Nach dem Kauf erhältst du:</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2; font-size: 1.1rem;">
+                    <li>✓ Sofortigen Zugang zu YOUR-BEST-BODY.DE</li>
+                    <li>✓ Alle 30+ Videos zum Streamen & Downloaden</li>
+                    <li>✓ Komplettes Ernährungskonzept mit Rezepten</li>
+                    <li>✓ Wissenschaftliche Tipps & Bonus-Material</li>
+                    <li>✓ Individuelle Empfehlungen nach 12 Wochen</li>
+                </ul>
+            </div>
+
+            <div class="guarantee">
+                <div class="guarantee-icon">✓</div>
+                <strong style="font-size: 1.3rem;">30 Tage Geld-zurück-Garantie</strong><br>
+                Null Risiko. Wenn du nicht zufrieden bist, bekommst du dein Geld zurück.
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll effect
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .stat').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
